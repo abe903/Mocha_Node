@@ -39,7 +39,6 @@ app.get("/", (req, res) => {
         if (err){
             console.log(err)
         }
-        console.log(results);
         res.render("home", {
             results: results
         });
@@ -90,4 +89,9 @@ app.post("/create", (req, res) => {
     connection.query(sql, event,(err) => {
         res.redirect('/');
     }); 
+})
+
+app.post("/search", (req, res) => {
+    console.log(req.body);
+    res.redirect("/");
 })
