@@ -34,13 +34,14 @@ app.listen(3000, () => {
 
 app.get("/", (req, res) => {
     let sql = 'SELECT * FROM events';
-
+    let myname = req.session.name;
     connection.query(sql, (err, results) => {
         if (err){
             console.log(err)
         }
         res.render("home", {
-            results: results
+            results: results,
+            myname: myname
         });
     }); 
 })
@@ -94,4 +95,9 @@ app.post("/create", (req, res) => {
 app.post("/search", (req, res) => {
     console.log(req.body);
     res.redirect("/");
+})
+
+app.get("/search", (req, res) => {
+    console.log(req.body);
+    res.render("search");
 })
