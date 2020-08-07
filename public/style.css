@@ -10,3 +10,13 @@
 #ministry-logo {
     width: 25%;
 }
+
+#the-card {
+    border-radius: 0px !important;
+    border-color: #e0e6e8 !important;
+    box-shadow: 0 1px 6px 0 rgba(36,50,66,.2);
+}
+
+#time {
+    color: coral;
+}
