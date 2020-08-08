@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(session({
 	secret: 'secret',
 	resave: true,
-	saveUninitialized: true
+    saveUninitialized: true,
+    maxAge: 24 * 60 * 60 * 1000 
 }));
 
 const connection = mysql.createConnection({
@@ -33,7 +34,7 @@ app.listen(3000, () => {
 });
 
 app.get("/", (req, res) => {
-    let sql = 'SELECT * FROM events';
+    let sql = 'SELECT * FROM gatherings';
     let myname = req.session.name;
     connection.query(sql, (err, results) => {
         if (err){
@@ -85,19 +86,26 @@ app.post("/login", (req, res) => {
 
 app.post("/create", (req, res) => {
     let id = req.session.idnumber;
-    let event = {name: req.body.name, information: req.body.information, date: req.body.date, time: req.body.time, location: req.body.location, userID: id}
-    let sql = "INSERT INTO events SET ?";
+    let event = {
+                 name: req.body.name, 
+                 information: req.body.information, 
+                 date: req.body.date, 
+                 time: req.body.time, 
+                 location: req.body.location, userID: id
+                }
+    let sql = "INSERT INTO gatherings SET ?";
     connection.query(sql, event,(err) => {
         res.redirect('/');
     }); 
 })
 
 app.post("/search", (req, res) => {
-    console.log(req.body);
     res.redirect("/");
 })
 
 app.get("/search", (req, res) => {
-    console.log(req.body);
-    res.render("search");
+    let myname = req.session.name;
+    res.render("search", {
+        myname: myname
+    });
 })
