@@ -1,12 +1,12 @@
-## Javascript + Express + MySQL
+#### Javascript + Express + MySQL
 
 
-### `npm install`
+#### `npm install`
 
 Install all the dependencies<br>
 
 
-### `nodemon server`
+#### `nodemon server`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
